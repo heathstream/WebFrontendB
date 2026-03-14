@@ -1,0 +1,246 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0em;
+    background-color: var(--color1);
+    color: white;
+}
+
+.layout {
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    grid-template-rows: 5rem 4rem 1fr 5rem;
+    grid-template-areas: 
+    "header header"
+    "menu menu"
+    "content content"
+    "footer footer";
+}
+
+.content {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: start;
+    grid-area: content;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+.header {
+    width: 1fr;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    grid-area: header;
+    border-bottom: 1px solid var(--color3);
+    background-color: var(--color2);
+}
+
+.header > h1 {
+    margin-left: 1rem;
+}
+
+.subHeader {
+    width: 100%;
+    min-height: 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: 2rem;
+    background-color: var(--logoColor);
+    mask: var(--logo) no-repeat center;
+    mask-size: contain;
+}
+
+.menu {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    grid-area: menu;
+    border-bottom: 1px solid var(--color3);
+}
+
+.menuItemGroup {
+    display: flex;
+    margin-left: 2rem;
+    flex-direction: inherit;
+}
+
+.menuItem {
+    color: var(--color4);
+    font-size: x-large;
+    margin-right: 2rem;
+    border-radius: 0.5rem;
+    padding: 0.2rem 1rem;
+}
+
+.activeMenuItem {
+    color: white;
+    background-color: var(--color3);
+}
+
+.menuItem:hover:not(.activeMenuItem) {
+    color: white;
+    background-color: var(--color2);
+}
+
+a {
+    text-decoration: none;
+}
+
+.footer {
+    width: 1fr;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: footer;
+    border-top: 1px solid var(--color3);
+    color: var(--color4)
+}
+
+.button {
+    background-color: var(--color3);
+    color: var(--color5);
+    border: 0;
+    font-size: large;
+    padding: 0.4rem 1.2rem;
+    height: 2.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.button:hover {
+    background-color: var(--color4);
+    color: white;
+    cursor: pointer;
+}
+
+.rounded2 {
+    border-radius: 2rem;
+}
+
+.rounded1 {
+    border-radius: 1rem; 
+}
+
+.bordered {
+    border: 1px solid var(--color3);
+}
+
+input {
+    background-color: var(--color3);
+    color: var(--color5);
+    border: 0;
+    padding-left: 1rem;
+    font-size: medium;
+}
+
+::placeholder {
+    color: var(--color4)
+}
+
+h2, h3 {
+    margin-left: 2rem;
+}
+
+p {
+    color: var(--color4);
+}
+
+.tableRow {
+    height: 4rem;
+    display: grid;
+    align-items: center;
+    font-size: larger;
+}
+
+.tableRow:nth-of-type(2n) {
+    background-color: var(--color2);
+}
+
+.tableRowTitle {
+    height: 2rem;
+    display: grid;
+    align-items: center;
+    font-size: larger;
+}
+
+.tableCell {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-right: 2px solid var(--color3);
+    padding-left: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tableCellTitle {
+    font-size: medium;
+    padding-left: 1rem;
+    color: var(--color4);
+}
+
+@media (orientation: landscape) {
+    .layout {
+        grid-template-areas:
+        "header header"
+        "menu content"
+        "menu content"
+        "footer footer";
+    }
+    
+    .menu {
+        flex-direction: column;
+        border-right: 1px solid var(--color3);
+        border-bottom: 0px;
+    }
+    
+    .menuItemGroup {
+        margin-top: 1rem;
+        margin-left: 0rem;
+    }
+
+    .menuItem {
+        margin-bottom: 1rem;
+        margin-right: 0rem;
+        text-align: end;
+    }
+}
+
+@media (width <= 600px) {
+    .content {
+        padding: 0rem;
+        gap: 0rem;
+    }
+
+    .rounded1 {
+        border-radius: 0rem;
+    }
+}
+
+/* @media (width >= 1400px) {
+    .content {
+        padding-left: 10rem;
+        padding-right: 10rem;
+    }
+} */
+
+/* DEBUG STYLES */
+/* div, h1, h2, h3, form, input {
+    border: 1px solid white;
+} */

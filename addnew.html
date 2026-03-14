@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="addnew.css">
+    <link rel="stylesheet" href="colors-fonts.css">
+</head>
+
+<body>
+    <div class="layout">
+        <div class="header">
+            <div class="logo"></div>
+            <h1>ArtistFinder</h1>
+        </div>
+        <div class="menu">
+            <div class="menuItemGroup">
+                <a href="index.html">
+                    <div class="menuItem">
+                        Home
+                    </div>
+                </a>
+                <a href="artists.html">
+                    <div class="menuItem">
+                        Artists
+                    </div>
+                </a>
+                <a href="addnew.html">
+                    <div class="menuItem activeMenuItem">
+                        Add new
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="content">
+            <div class="addNewContainer rounded1 bordered">
+                <div class="subHeader">
+                    <h2>Add new artist</h2>
+                </div>
+                <form>
+                    <input class="addNewEntry rounded2" id="name" placeholder="Name"
+                    type="text">
+                    <input class="addNewEntry rounded2" id="genre" placeholder="Genre"
+                    type="text">
+                    <input class="addNewEntry rounded2" id="year" placeholder="Year"
+                    type="number" pattern="\d4">
+                    <input type="submit" class="button rounded2"></input>
+                </form>
+                <div style="height: 2rem"></div>
+            </div>
+        </div>
+        <div class="footer">(c) Anders Hedström</footer>
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+.artistsContainer {
+    flex: 1;
+    max-width: 60rem;
+}
+
+.searchBoxGroup {
+    width: 28rem;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 1rem 2rem;
+}
+
+.searchBoxGroup > input {
+    width: 100%;
+    display: block;
+    height: 2.4rem;
+}
+
+.artistsTable {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.artistsTableRow {
+    grid-template-columns: 5rem 25% 25% 12% 8% 1fr;
+    grid-template-areas: "image name genre year albums details";
+}
+
+.artistImage {
+    grid-area: image;
+    display: flex;
+    justify-content: center;
+}
+
+.artistImage > img {
+    height: 3rem;
+    width: 3rem;
+}
+
+.artistName {
+    grid-area: name;
+}
+
+.artistGenre {
+    grid-area: genre;
+}
+
+.artistYear {
+    grid-area: year;
+}
+
+.artistAlbums {
+    grid-area: albums;
+}
+
+.artistDetails {
+    grid-area: details;
+}
+
+.artistDetails > button {
+    justify-self: end;
+}
+
+.detailsButton {
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+.browseButtonGroup {
+    display: flex;
+    margin: 1rem;
+    gap: 0.7rem;
+    margin-right: auto;
+}
+
+h1 {
+    margin-left: 2rem;
+}
+
+@media (width <= 850px) {
+    .searchBoxGroup {
+        width: 100%;
+    }
+}
+
+@media (width <= 600px) {
+    .artistsTableRow {
+        grid-template-columns: 4rem 25% 25% 15% 1fr;
+        grid-template-areas: "image name genre year details";
+    }
+
+    .artistAlbums {
+        display: none;
+    }
+}
