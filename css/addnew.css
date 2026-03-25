@@ -16,10 +16,35 @@ form {
 }
 
 .addNewEntry {
-    height: 2rem;
+    height: 2.4rem;
     font-size: larger;
     display: grid;
     grid-template-columns: 6rem 10rem;
+}
+
+select {
+    width: 100%;
+}
+
+#genre:invalid, #year:invalid {
+    color: var(--color4);
+}
+
+option {
+    color: var(--color4);
+}
+
+#submitStatusText {
+    font-size: large;
+    font-style: italic;
+}
+
+.submitFail {
+    color: red;
+}
+
+.submitSuccess {
+    color: var(--logoColor);
 }
 
 /* button {

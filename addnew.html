@@ -41,14 +41,20 @@
                     <h2>Add new artist</h2>
                 </div>
                 <form>
-                    <input class="addNewEntry rounded2" id="name" placeholder="Name"
-                    type="text">
-                    <input class="addNewEntry rounded2" id="genre" placeholder="Genre"
-                    type="text">
-                    <input class="addNewEntry rounded2" id="year" placeholder="Year"
-                    type="number" pattern="\d4">
-                    <input type="submit" class="button rounded2"></input>
+                    <input class="addNewEntry valueInput rounded2" id="name" placeholder="Name"
+                    type="text" required>
+
+                    <select class="addNewEntry valueInput rounded2" id="genre" required>
+                        <option value="" disabled selected>Genre</option>
+                    </select>
+
+                    <select class="addNewEntry valueInput rounded2" id="year" required>
+                        <option value="" disabled selected>Year</option>
+                    </select>
+
+                    <input type="submit" class="button rounded2">
                 </form>
+                <span id="submitStatusText"></span>
                 <div style="height: 2rem"></div>
             </div>
         </div>
