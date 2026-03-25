@@ -3,15 +3,19 @@ import { musicGroupService } from "./api-service.js";
 
 const _service = new musicGroupService("https://music.api.public.seido.se/api");
 let musicGroups;
+let filter = "";
 
+// Paginatorns värden
 const pageSize = 10;
 let pageCount;
 let currentPage = 0;
 
 // Sidans element:
+const artistsTableLoader = document.querySelector(".artistsTableLoader");
 let artistsTable = document.querySelector(".artistsTable");
 let tableBottom = document.querySelector("#tableBottom");
 let searchBox = document.querySelector("#searchBox");
+let paginatorText = document.querySelector("#paginatorText");
 document.querySelector("#buttonPrev").addEventListener("click", clickHandlerPrev);
 document.querySelector("#buttonNext").addEventListener("click", clickHandlerNext);
 document.querySelector("#buttonSearch").addEventListener("click", clickHandlerSearch);
@@ -24,7 +28,7 @@ document.querySelector("#buttonSearch").addEventListener("click", clickHandlerSe
 
 })();
 
-async function loadMusicGroups(filter = null) {
+async function loadMusicGroups() {
     musicGroups = await _service.readMusicGroupsAsync(currentPage, pageSize, filter);
     pageCount = musicGroups.pageCount;
 }
@@ -33,18 +37,23 @@ async function loadMusicGroups(filter = null) {
 async function fillList() {
     clearList();
 
+    paginatorText.innerText = `Showing (${currentPage * pageSize + 1} - ${Math.min(currentPage * pageSize + pageSize, musicGroups.dbItemsCount)}) of ${musicGroups.dbItemsCount}`;
+
     for (const musicGroup of musicGroups.pageItems) {
         let tableRow = addTableRow();
         tableRow.appendChild(addTableCell("artistName", musicGroup.name));
         tableRow.appendChild(addTableCell("artistGenre", convertGenre(musicGroup.genre)));
         tableRow.appendChild(addTableCell("artistYear", musicGroup.establishedYear));
         tableRow.appendChild(addTableCell("artistAlbums", musicGroup.albums ? musicGroup.albums.length : "0"));
-        let artistDetails = tableRow.appendChild(addTableCell("artistDetails"));
+        let artistDetails = tableRow.appendChild(document.createElement("div"));
+        artistDetails.classList.add("artistDetails");
         let infoButton = artistDetails.appendChild(document.createElement("button"));
         infoButton.classList.add("button", "detailsButton", "rounded2");
         infoButton.innerText = "Info";
         infoButton.addEventListener("click", () => clickHandlerDetails(musicGroup.musicGroupId));
     }
+
+    toggleLoader();
 
     function addTableRow() {
         let tableRow = document.createElement("div");
@@ -64,7 +73,7 @@ async function fillList() {
 // Funktion som rensar listan
 function clearList() {
     while (artistsTable.querySelector(".artistsTableRow")) {
-        artistsTable.removeChild(artistsTable.firstChild);
+        artistsTable.removeChild(artistsTable.querySelector(".artistsTableRow"));
     }
 }
 
@@ -75,23 +84,32 @@ function clickHandlerDetails(musicGroupId) {
 
 async function clickHandlerNext() {
     if (currentPage < pageCount - 1) {
+        toggleLoader();
         currentPage++;
-        await loadMusicGroups(searchBox.value || null);
+        await loadMusicGroups();
         fillList();
     }
 }
 
 async function clickHandlerPrev() {
     if (currentPage > 0) {
+        toggleLoader();
         currentPage--;
-        await loadMusicGroups(searchBox.value || null);
+        await loadMusicGroups();
         fillList();
     }
 }
 
 async function clickHandlerSearch() {
-    await loadMusicGroups(searchBox.value || null);
+    toggleLoader();
+    filter = searchBox.value;
+    currentPage = 0;
+    await loadMusicGroups();
     fillList();
+}
+
+function toggleLoader() {
+    artistsTableLoader.classList.toggle("hidden");
 }
 
 // Funktion som konverterar genre-numren till genrer

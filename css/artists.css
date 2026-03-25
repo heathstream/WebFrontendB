@@ -5,7 +5,7 @@
 
 .searchBoxGroup {
     width: 100%;
-    max-width: 32rem;
+    max-width: 24rem;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -25,11 +25,25 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
+    position: relative;
 }
 
 .artistsTableRow {
-    grid-template-columns: 5rem 25% 25% 12% 8% 1fr;
+    grid-template-columns: 5rem 30% 20% 12% 8% 1fr;
     grid-template-areas: "image name genre year albums details";
+}
+
+.artistsTableLoader {
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color1);
+    opacity: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color5);
+    font-size: xx-large;
 }
 
 .artistImage {
@@ -74,13 +88,24 @@
 
 .browseButtonGroup {
     display: flex;
+    align-items: center;
     margin: 1rem;
     gap: 0.7rem;
     margin-right: auto;
 }
 
+#paginatorText {
+    color: var(--color4);
+    font-size: large;
+    margin-right: 1rem;
+}
+
 h1 {
     margin-left: 2rem;
+}
+
+.hidden {
+    display: none;
 }
 
 @media (width <= 850px) {
@@ -91,15 +116,20 @@ h1 {
 
 @media (width <= 600px) {
     .artistsTableRow {
-        grid-template-columns: 4rem 25% 25% 15% 1fr;
-        grid-template-areas: "image name genre year details";
+        grid-template-columns: 4rem 45% 20% 1fr;
+        grid-template-areas: "image name genre details";
     }
 
-    .artistAlbums {
+    .artistAlbums, .artistYear {
         display: none;
     }
 
     .searchBoxGroup {
         margin: 0rem 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .artistsContainer {
+        border: 0px;
     }
 }
