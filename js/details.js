@@ -1,5 +1,5 @@
 "use strict";
-import { musicGroupService, convertGenre } from "./api-service.js";
+import { musicGroupService } from "./api-service.js";
 
 const _service = new musicGroupService("https://music.api.public.seido.se/api");
 let musicGroup;
@@ -21,7 +21,7 @@ const albumsTableBottom = document.querySelector("#albumsTableBottom");
     console.log(musicGroup);
 
     nameDiv.innerText = musicGroup.item.name;
-    genreDiv.innerText = convertGenre(musicGroup.item.genre);
+    genreDiv.innerText = musicGroup.item.strGenre;
     yearDiv.innerText = musicGroup.item.establishedYear;
 
     fillLists();

@@ -1,5 +1,5 @@
 "use strict";
-import { musicGroupService, convertGenre } from "./api-service.js";
+import { musicGroupService } from "./api-service.js";
 
 const _service = new musicGroupService("https://music.api.public.seido.se/api");
 let musicGroups;
@@ -36,12 +36,14 @@ async function loadMusicGroups() {
 async function fillList() {
     clearList();
 
-    paginatorText.innerText = `${currentPage * pageSize + 1}-${Math.min(currentPage * pageSize + pageSize, musicGroups.dbItemsCount)} of ${musicGroups.dbItemsCount} groups`;
+    paginatorText.innerText = musicGroups.pageItems.length > 0
+    ? `${currentPage * pageSize + 1}-${Math.min(currentPage * pageSize + pageSize, musicGroups.dbItemsCount)} of ${musicGroups.dbItemsCount} groups`
+    : `No results found`;
 
     for (const musicGroup of musicGroups.pageItems) {
         let tableRow = addTableRow();
         tableRow.appendChild(addTableCell("artistName", musicGroup.name));
-        tableRow.appendChild(addTableCell("artistGenre", convertGenre(musicGroup.genre)));
+        tableRow.appendChild(addTableCell("artistGenre", musicGroup.strGenre));
         tableRow.appendChild(addTableCell("artistYear", musicGroup.establishedYear));
         tableRow.appendChild(addTableCell("artistAlbums", musicGroup.albums ? musicGroup.albums.length : "0"));
         let artistDetails = tableRow.appendChild(document.createElement("div"));
