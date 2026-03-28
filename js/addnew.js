@@ -30,19 +30,23 @@ async function submitHandler(e) {
     }
     else {
         e.preventDefault();
-        const name = new String(nameInput.value);
-        const genre = new String(genreInput.value);
-        const year = new Number(yearInput.value);
+        const name = nameInput.value;
+        const genre = genreInput.value;
+        const year = yearInput.value;
 
         // Extra felhantering innan vi skickar till API:t, utifall användaren fipplat med formen på något sätt
         if (name.length < 3) {
             nameInput.dispatchEvent(new Event("invalid"));
             return;
         }
-        // else if (!musicGenres.includes(genre)) {
-        //     genreInput.dispatchEvent(new Event("invalid"));
-        //     return;
-        // }
+        else if (!musicGenres.includes(genre)) {
+            genreInput.dispatchEvent(new Event("invalid"));
+            return;
+        }
+        else if (!(year >= 1900 && year <= new Date().getFullYear())) {
+            yearInput.dispatchEvent(new Event("invalid"));
+            return;
+        }
 
         const newMusicGroup = {
             "musicGroupId": null,
