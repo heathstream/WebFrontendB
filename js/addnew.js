@@ -75,21 +75,7 @@ async function submitHandler(e) {
 
 function inputInvalidHandler(e, errorText, errorTextContainer) {
     e.preventDefault();
-    errorTextContainer.innerText = errorText;
-    setInvalidText(errorTextContainer);
-}
-
-function validateNameInput(name) {
-    const trimmed = name.trim();
-    const matchesRegex = /^[a-öA-Ö0-9 ]+$/.test(trimmed);
-    if (!(trimmed.length > 2 && matchesRegex)) {
-        nameInput.setCustomValidity("invalid");
-        nameValidityText.innerText = "Must be at least 3 characters.";
-        setInvalidText(nameValidityText);
-    } else {
-        nameInput.setCustomValidity("");
-        setValidText(nameValidityText);
-    }
+    setInvalidText(errorTextContainer, errorText);
 }
 
 function setValidText(element) {
@@ -98,7 +84,8 @@ function setValidText(element) {
     element.classList.add("valid");
 }
 
-function setInvalidText(element) {
+function setInvalidText(element, errorText) {
+    element.innerText = errorText;
     element.classList.add("invalid");
     element.classList.remove("valid");
 }
@@ -107,6 +94,18 @@ function clearValidityText(element) {
     element.innerText = "";
     element.classList.remove("invalid");
     element.classList.remove("valid");
+}
+
+function validateNameInput(name) {
+    const trimmed = name.trim();
+    const matchesRegex = /^[a-öA-Ö0-9 ]+$/.test(trimmed);
+    if (!(trimmed.length > 2 && matchesRegex)) {
+        nameInput.setCustomValidity("invalid");
+        setInvalidText(nameValidityText, "Must be at least 3 characters.");
+    } else {
+        nameInput.setCustomValidity("");
+        setValidText(nameValidityText);
+    }
 }
 
 function populateGenreOptions() {
